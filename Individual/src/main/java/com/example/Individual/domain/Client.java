@@ -1,22 +1,21 @@
 package com.example.Individual.domain;
 
+import com.example.Individual.domain.persistence.entity.OrderEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Manager {
-    private String pcn;
+public class Client {
     private String firstName;
     private String lastName;
-    private LocalDate contractStartDate;
-    private LocalDate contractEndDate;
     private String email;
     private String password;
+    private List<OrderEntity> orders;
 }

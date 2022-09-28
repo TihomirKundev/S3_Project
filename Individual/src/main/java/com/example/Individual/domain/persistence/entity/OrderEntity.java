@@ -3,12 +3,14 @@ package com.example.Individual.domain.persistence.entity;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.List;
 import java.util.Map;
 
 @Data
 @Builder
 public class OrderEntity {
+    String clientEmail;
+    int orderNum;
     Map<ProductEntity, Integer> products;
-    private boolean isItActive;
+    boolean isItActive;
+    double totalPrice;
 }

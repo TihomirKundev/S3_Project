@@ -13,6 +13,9 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order {
+    String clientEmail;
+    int orderNum;
     Map<ProductEntity, Integer> products;
-    private boolean isItActive;
+    boolean isItActive;
+    double totalPrice;
 }

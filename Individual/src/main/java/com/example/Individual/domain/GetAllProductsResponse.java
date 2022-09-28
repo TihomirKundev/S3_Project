@@ -3,8 +3,9 @@ package com.example.Individual.domain;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
 @Data
 @Builder
-public class CreateStaffResponse {
-    private String result;
+public class GetAllProductsResponse {
+    List<Product> products;
 }

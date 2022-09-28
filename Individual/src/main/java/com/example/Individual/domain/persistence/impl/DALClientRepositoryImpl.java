@@ -6,8 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Predicate;
 
 @Repository
 public class DALClientRepositoryImpl implements ClientRepository {
@@ -22,7 +20,7 @@ public class DALClientRepositoryImpl implements ClientRepository {
                 .anyMatch(clientEntity -> clientEntity.getEmail().equals(email));
     }
 
-    @Override
+    /*@Override
     public ClientEntity Login(ClientEntity client) {
         Predicate<ClientEntity> checkEmail = x -> x.getEmail().equals(client.getEmail());
         Predicate<ClientEntity> checkPass = x -> x.getPassword().equals(client.getPassword());
@@ -38,7 +36,7 @@ public class DALClientRepositoryImpl implements ClientRepository {
     public void Register(ClientEntity client) {
         this.clients.add(client);
     }
-
+*/
     @Override
     public int countRegisteredUsers() {
         return this.clients.size();

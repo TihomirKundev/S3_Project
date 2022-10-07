@@ -1,4 +1,4 @@
-package com.example.Individual.domain.persistence.impl;
+package com.example.Individual.domain.persistence.dalImpl;
 
 import com.example.Individual.domain.persistence.ProductRepository;
 import com.example.Individual.domain.persistence.entity.ProductEntity;
@@ -17,7 +17,11 @@ public class DALProductRepositoryImpl implements ProductRepository {
         this.products.add(product);
     }
 
-    public void Update(ProductEntity product) {
+    public void Update(String SKU, String description, Double price) {
+        products.stream()
+                .filter(x -> x.getSKU().equals(SKU))
+                .findFirst()
+                .ifPresent(x -> {x.setPrice(price); x.setDescription(description);});
     }
 
     public void Delete(String SKU) {

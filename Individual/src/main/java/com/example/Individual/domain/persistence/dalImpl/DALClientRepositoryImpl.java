@@ -1,4 +1,4 @@
-package com.example.Individual.domain.persistence.impl;
+package com.example.Individual.domain.persistence.dalImpl;
 
 import com.example.Individual.domain.persistence.ClientRepository;
 import com.example.Individual.domain.persistence.entity.ClientEntity;

@@ -1,4 +1,4 @@
-package com.example.Individual.domain.persistence.impl;
+package com.example.Individual.domain.persistence.dalImpl;
 
 import com.example.Individual.domain.persistence.OrderRepository;
 import com.example.Individual.domain.persistence.entity.OrderEntity;
@@ -10,10 +10,11 @@ import java.util.List;
 
 @Repository
 public class DALOrderRepositoryImpl implements OrderRepository {
-    private final List<OrderEntity> orders = new ArrayList();
+    private final List<OrderEntity> orders;
     private static int NEXT_ID = 1;
 
     public DALOrderRepositoryImpl() {
+        this.orders = new ArrayList<>();
     }
 
     public void CreateNewOrder(String email) {

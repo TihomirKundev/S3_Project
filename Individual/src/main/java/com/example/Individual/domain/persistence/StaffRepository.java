@@ -2,12 +2,13 @@ package com.example.Individual.domain.persistence;
 
 import com.example.Individual.domain.persistence.entity.StaffEntity;
 
+import java.util.Date;
 import java.util.List;
 
 public interface StaffRepository {
     void Hire(StaffEntity staff);
 
-    void Update(StaffEntity staff);
+    void Update(Long pcn, Date contractEndDate);
 
     void Fire(Long pcn);
 

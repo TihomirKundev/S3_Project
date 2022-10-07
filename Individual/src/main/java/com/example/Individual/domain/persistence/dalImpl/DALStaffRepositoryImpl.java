@@ -1,10 +1,11 @@
-package com.example.Individual.domain.persistence.impl;
+package com.example.Individual.domain.persistence.dalImpl;
 
 import com.example.Individual.domain.persistence.StaffRepository;
 import com.example.Individual.domain.persistence.entity.StaffEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -18,13 +19,11 @@ public class DALStaffRepositoryImpl implements StaffRepository {
         this.staffs.add(staff);
     }
 
-    public void Update(StaffEntity staff) {
-        Predicate<StaffEntity> checkPcn = (x) -> {
-            return x.getPcn().equals(staff.getPcn());
-        };
-        StaffEntity res = (StaffEntity)this.staffs.stream().filter(checkPcn).findFirst().orElse(null);
-        int a = this.staffs.stream().toList().indexOf(res);
-        this.staffs.set(a, staff);
+    public void Update(Long pcn, Date contractEndDate) {
+        staffs.stream()
+                .filter(x -> x.getPcn().equals(pcn))
+                .findFirst()
+                .ifPresent(x -> x.setContractEndDate(contractEndDate));
     }
 
     public void Fire(Long pcn) {

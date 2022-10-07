@@ -7,7 +7,7 @@ import java.util.List;
 public interface ProductRepository {
     void Create(ProductEntity product);
 
-    void Update(ProductEntity product);
+    void Update(String SKU, String description, Double price);
 
     void Delete(String SKU);
 

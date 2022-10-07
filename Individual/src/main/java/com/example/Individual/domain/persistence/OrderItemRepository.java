@@ -3,18 +3,18 @@ package com.example.Individual.domain.persistence;
 import com.example.Individual.domain.persistence.entity.OrderEntity;
 import com.example.Individual.domain.persistence.entity.ProductEntity;
 
-import java.util.List;
+import java.util.Map;
 
 public interface OrderItemRepository {
-    void AddProduct(ProductEntity product, Integer quantity);
+    void addProduct(ProductEntity product, Integer quantity);
 
-    void IncreaseQuantity(String SKU);
+    void increaseQuantity(String SKU);
 
-    void DecreaseQuantity(String SKU);
+    void decreaseQuantity(String SKU);
 
-    void RemoveProduct(ProductEntity product);
+    void removeProduct(ProductEntity product);
 
-    void RemoveAllProducts();
+    void removeAllProducts();
 
-    List<ProductEntity> GetAllProductsForOder(OrderEntity order);
+    Map<ProductEntity, Integer> getAllProductsForOder(OrderEntity order);
 }

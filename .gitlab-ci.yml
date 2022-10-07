@@ -23,9 +23,9 @@ stages:
 build: 
   stage: build 
   script: 
-      - ./gradlew assemble 
+      - gradle bootRun 
 
 test: 
   stage: test 
   script: 
-      - ./gradlew test
+      - gradle test

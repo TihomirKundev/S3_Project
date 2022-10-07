@@ -23,6 +23,7 @@ stages:
 build: 
   stage: build 
   script: 
+      - gradle build
       - gradle bootRun 
 
 test: 

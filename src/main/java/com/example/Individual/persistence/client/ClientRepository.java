@@ -9,4 +9,7 @@ public interface ClientRepository extends JpaRepository<ClientEntity,String> {
     @Query("select count(c) from ClientEntity c where c.email is not null")
     long countByEmailNotNull();
 
+    @Query("select (count(c) > 0) from ClientEntity c where c.email = ?1")
+    boolean existsByEmail(String email);
+
 }

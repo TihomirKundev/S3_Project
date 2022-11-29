@@ -43,7 +43,7 @@ public class CreateStaffUseCaseTest {
         String expectedMessage = "Successfully hired!";
         String actualMessage = response.getResult();
         assertEquals(expectedMessage,actualMessage);
-        verify(emailValidator).validateEmailForCreate(request.getEmail());
+        verify(emailValidator).validateEmailForCreateForStaff(request.getEmail());
     }
     @Test
     void createStaff_shouldThrowInvalidEmailException(){
@@ -55,7 +55,7 @@ public class CreateStaffUseCaseTest {
                 .email("tihomirkandev@gmail.com")
                 .password("tihomir0")
                 .build();
-        when(emailValidator.validateEmailForCreate(request.getEmail())).thenThrow(InvalidEmailException.class);
+        when(emailValidator.validateEmailForCreateForStaff(request.getEmail())).thenThrow(InvalidEmailException.class);
         CreateStaffResponse response = createStaffUseCase.createStaff(request);
         assertEquals("Email is invalid",response.getResult());
     }

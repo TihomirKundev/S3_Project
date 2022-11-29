@@ -50,7 +50,6 @@ class ProductControllerTest {
     private DeleteProductUseCase deleteProductUseCase;
 
     @Test
-    @WithMockUser(username = "tihomir", password = "tihomir",roles = {"STAFF"})
     void getProducts() throws Exception {
         Product product = Product.builder()
                 .SKU("Kit_123")

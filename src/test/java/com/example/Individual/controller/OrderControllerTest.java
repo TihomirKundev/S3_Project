@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -66,8 +67,10 @@ class OrderControllerTest {
     @Test
     @WithMockUser(username = "tihomir", password = "tihomir",roles = {"CLIENT"})
     void createNewOrder() throws Exception{
+        when(createNewOrderUseCase.createOrder("tihomirkandev@gmail.com")).thenReturn("Success");
         mockMvc.perform(MockMvcRequestBuilders.post("/orders/{email}", "tihomirkandev@gmail.com"))
                 .andExpect(status().isCreated());
+        verify(createNewOrderUseCase).createOrder("tihomirkandev@gmail.com");
     }
 
     @Test
@@ -97,7 +100,9 @@ class OrderControllerTest {
     @Test
     @WithMockUser(username = "tihomir", password = "tihomir",roles = {"CLIENT"})
     void payOrder() throws Exception{
+        when(payOrderUseCase.payOrder("tihomirkandev@gmail.com")).thenReturn("Success");
         mockMvc.perform( MockMvcRequestBuilders.put("/orders/{email}", "tihomirkandev@gmail.com") )
                 .andExpect(status().isOk());
+        verify(payOrderUseCase).payOrder("tihomirkandev@gmail.com");
     }
 }

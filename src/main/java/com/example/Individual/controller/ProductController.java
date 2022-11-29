@@ -26,7 +26,7 @@ public class ProductController {
     private final UpdateProductUseCase updateProductUseCase;
     private final DeleteProductUseCase deleteProductUseCase;
 
-    @RolesAllowed({"ROLE_STAFF"})
+
     @GetMapping
     public ResponseEntity<GetAllProductsResponse> getProducts() {
         return ResponseEntity.ok(this.getProductsUseCase.getProducts());

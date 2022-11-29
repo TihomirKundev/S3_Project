@@ -17,7 +17,7 @@ public class GetProductsUseCaseImpl implements GetProductsUseCase {
     private final ProductRepository productRepository;
 
     @Transactional
-    public GetAllProductsResponse getProducts() {
+    public GetAllProductsResponse  getProducts() {
         List<Product> productList = this.productRepository.findAll().stream().map(ProductConverter::Convert).toList();
         return GetAllProductsResponse.builder().products(productList).build();
     }

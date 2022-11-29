@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -49,9 +50,9 @@ class GetActiveOrderUseCaseTest {
                 .build();
         when(accessToken.getRole()).thenReturn(Roles.CLIENT);
         when(accessToken.getEmail()).thenReturn(email);
-        //noinspection OptionalGetWithoutIsPresent
+        //TODO don't know how to fix it
         when(orderRepository.findByClientEmailAndIsItActiveTrue(email).get()).thenReturn(order);
-        when(OrderConverter.Convert(order)).thenReturn(order1);
+        when(OrderConverter.Convert(isA(OrderEntity.class))).thenReturn(order1);
         Order order2 = getActiveOrderUseCase.getActiveOrder(email);
         assertNotNull(order1);
         verify(accessToken).getRole();

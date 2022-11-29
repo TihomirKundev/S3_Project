@@ -21,7 +21,7 @@ public class CreateStaffUseCaseImpl implements CreateStaffUseCase {
 
     public CreateStaffResponse createStaff(CreateStaffRequest request) {
         try{
-            this.emailValidator.validateEmailForCreate(request.getEmail());
+            this.emailValidator.validateEmailForCreateForStaff(request.getEmail());
         }catch (Exception e){
             return CreateStaffResponse.builder().result("Email is invalid").build();
         }

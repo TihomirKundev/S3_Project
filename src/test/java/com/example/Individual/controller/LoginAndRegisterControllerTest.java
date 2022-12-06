@@ -1,8 +1,10 @@
 package com.example.Individual.controller;
 
 import com.example.Individual.dto.requests.LoginRequest;
+import com.example.Individual.dto.requests.RegisterRequest;
 import com.example.Individual.dto.responses.LoginResponse;
-import com.example.Individual.service.loginUseCases.LoginUseCase;
+import com.example.Individual.service.loginandRegisterUseCases.LoginUseCase;
+import com.example.Individual.service.loginandRegisterUseCases.RegisterUseCase;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -17,7 +19,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -32,6 +33,8 @@ class LoginAndRegisterControllerTest {
 
     @MockBean
     private LoginUseCase loginUseCase;
+    @MockBean
+    private RegisterUseCase registerUseCase;
 
     @Test
     void login() throws Exception{
@@ -50,9 +53,38 @@ class LoginAndRegisterControllerTest {
         String requestJSON = ow.writeValueAsString(request);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/loginAndRegister/")
+                .post("/loginAndRegister/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestJSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(header().string("Content-Type", APPLICATION_JSON_VALUE))
+                .andExpect(content().json("""
+                        {"accessToken":"Test"}
+                        """));
+    }
+    @Test
+    void register() throws Exception{
+        RegisterRequest request = RegisterRequest.builder()
+                .firstName("Tihomir")
+                .lastName("Kandev")
+                .email("tihomirkandev@gmail.com")
+                .password("1234")
+                .build();
+        LoginResponse response = LoginResponse.builder()
+                .accessToken("Test")
+                .build();
+        when(registerUseCase.register(request)).thenReturn(response);
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+        String requestJSON = ow.writeValueAsString(request);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post("/loginAndRegister/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestJSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(header().string("Content-Type", APPLICATION_JSON_VALUE))

@@ -22,7 +22,7 @@ public class OrderController {
     private final CreateNewOrderUseCase createNewOrderUseCase;
     private final GetPastOrdersForClientUseCase getPastOrdersForClientUseCase;
     private final PayOrderUseCase payOrderUseCase;
-    @RolesAllowed({"ROLE_CLIENT"})
+    //@RolesAllowed({"ROLE_CLIENT"})
     @GetMapping("{email}/active_order")
     public ResponseEntity<Order> getActiveOrder(@PathVariable String email) {
         if(this.getActiveOrderUseCase.getActiveOrder(email) == null){
@@ -31,7 +31,7 @@ public class OrderController {
             return ResponseEntity.ok(this.getActiveOrderUseCase.getActiveOrder(email));
         }
     }
-    @RolesAllowed({"ROLE_CLIENT"})
+    //@RolesAllowed({"ROLE_CLIENT"})
     @PostMapping("{email}")
     public ResponseEntity<Void> createNewOrder(@PathVariable String email){
         String result = this.createNewOrderUseCase.createOrder(email);

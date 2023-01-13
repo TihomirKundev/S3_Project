@@ -1,0 +1,33 @@
+version: "3"
+services:
+  backendt:
+    ports:
+      - "8080:8080"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: "no"
+    networks:
+      jjt:
+        ipv4_address: 10.56.1.2
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  frontendt:
+    build:
+      context: ../../frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    restart: always
+    depends_on:
+      - backendt
+    networks:
+      jjt:
+        ipv4_address: 10.56.1.4
+
+networks:
+  jjt:
+    ipam:
+      driver: default
+      config:
+        - subnet: "10.56.1.0/24"

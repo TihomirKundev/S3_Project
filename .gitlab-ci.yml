@@ -26,13 +26,13 @@ build:
   script:
     - gradle build
     - gradle bootRun
-    - .\backend\gradlew build
+    - .\gradlew build
 
 test:
   stage: test
   script:
     - gradle test
-    - .\backend\gradlew test
+    - .\gradlew test
 sonarqube-check:
   image: gradle:jre11-slim
   variables:
@@ -44,7 +44,7 @@ sonarqube-check:
       - .sonar\cache
   stage: sonarqube
   script:
-    - .\backend\gradlew sonarqube
+    - .\gradlew sonarqube
   allow_failure: true
   only:
     - main # or the name of your main branch
